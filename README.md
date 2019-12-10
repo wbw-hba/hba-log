@@ -1,4 +1,4 @@
-### 汉邦日志系统
+# 汉邦日志系统
 #### 目录结构说明
 ```
 hba-log
@@ -11,3 +11,6 @@ hba-log
    
   hba-log-api---------------api接收系统
 ```
+
+### Showdoc
+##### https://www.showdoc.cc/hbsyslog?page_id=3404417811900384
