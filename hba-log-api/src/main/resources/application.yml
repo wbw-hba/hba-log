@@ -18,3 +18,8 @@ logging:
   file: logs/app.log
   level:
     root: info
+app:
+  su:
+    # 启用es与kafka发送数据，启用为true，不启用为 false
+    es: true
+    kafka: false

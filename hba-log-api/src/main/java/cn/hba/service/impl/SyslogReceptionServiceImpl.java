@@ -44,7 +44,7 @@ public class SyslogReceptionServiceImpl implements SyslogReceptionService {
         JSONArray array = this.checkJson(JSONUtil.parseArray(v), ip);
         if (array.size() > 0) {
             sendData.send(array);
-            log.info("接收数据,效验通过:\t\n{}", v);
+            log.info("接收数据,效验通过...");
         } else {
             log.warn("接收数据,效验未通过:\t\n{}", v);
         }
