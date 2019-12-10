@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: ace-log-analysis
+  kafka:
+    consumer:
+      fetch-max-wait: 10000
+      bootstrap-servers: 192.168.5.101:9092
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: syslog
+      auto-offset-reset: earliest
+    listener:
+      poll-timeout: 20000
+server:
+  port: 8892
+logging:
+  file: logs/app.log
+  level:
+    root: info
