@@ -75,6 +75,13 @@ public class EsService {
         }
     }
 
+    /**
+     * 添加数据
+     *
+     * @param index 索引
+     * @param type  类型
+     * @param json  数据
+     */
     public void add(String index, String type, String json) {
         this.add(index + "/" + type + "/" + UUIDs.base64UUID(), json);
     }
