@@ -30,6 +30,8 @@ public class HBaseConfigurationBase {
     public Configuration configuration() {
         Configuration conf = HBaseConfiguration.create();
         conf.set("hbase.zookeeper.quorum", quorum);
+        conf.set("hbase.defaults.for.version.skip", "true");
+
         log.info("hbase.zookeeper.quorum is:\t{}", quorum);
         return conf;
     }

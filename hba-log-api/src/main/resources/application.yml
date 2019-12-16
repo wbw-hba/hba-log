@@ -15,11 +15,11 @@ spring:
       force-response: true
       force-request: true
 logging:
-  file: logs/app.log
+  file: logs/ace-syslog-app.log
   level:
     root: info
 app:
   su:
     # 启用es与kafka发送数据，启用为true，不启用为 false
-    es: true
-    kafka: false
+    es: false
+    kafka: true
