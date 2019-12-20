@@ -9,7 +9,7 @@ import org.apache.flume.interceptor.Interceptor;
 import java.util.List;
 
 /**
- * syslog日志拦截器
+ * Udp 日志拦截器
  *
  * @author wbw
  * @date 2019/9/6 10:44
@@ -63,8 +63,8 @@ public class UdpSyslogParseInterceptor implements Interceptor {
         public void configure(Context context) {
             ipConfig = context.getString("ipConfig");
             isGatherLog = context.getBoolean("isGatherLog");
-            log.info("Udp 设备ip 配置:\t{}", ipConfig);
-            log.info("Udp 是否为采集日志原始格式：\t", isGatherLog);
+            log.info("Udp device IP configuration:\t{}", ipConfig);
+            log.info("Whether Udp is the original format for the connection log:\t", isGatherLog);
         }
 
         @Override

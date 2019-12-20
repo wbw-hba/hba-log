@@ -9,6 +9,8 @@ import org.apache.flume.interceptor.Interceptor;
 import java.util.List;
 
 /**
+ * tcp 拦截器
+ *
  * @author wbw
  * @date 2019/12/3 10:40
  */
@@ -62,8 +64,8 @@ public class TcpSyslogParseInterceptor implements Interceptor {
         public void configure(Context context) {
             ipConfig = context.getString("ipConfig");
             isGatherLog = context.getBoolean("isGatherLog");
-            log.info("Tcp 设备ip 配置:\t{}", ipConfig);
-            log.info("Tcp 是否为采集日志原始格式：\t{}", isGatherLog);
+            log.info("Tcp device IP configuration:\t{}", ipConfig);
+            log.info("Whether Tcp is the original format for the collection log:\t{}", isGatherLog);
         }
 
         @Override

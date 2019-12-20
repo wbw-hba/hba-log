@@ -135,7 +135,7 @@ public class SyslogParseChannels {
      */
     void loadFacilityIp(String ipConfig) {
         if (StrUtil.isBlank(ipConfig) || !JSONUtil.isJsonObj(ipConfig)) {
-            log.error("ipConfig 没有正确配置....");
+            log.error("ipConfig is not configured correctly...");
             System.exit(0);
         }
         this.putKeyBySyslogParse();
@@ -143,12 +143,12 @@ public class SyslogParseChannels {
         JSONObject obj = JSONUtil.parseObj(ipConfig);
         obj.keySet().forEach(key -> {
             if (!keys.containsKey(key)) {
-                log.error("ipConfig 没有正确配置....");
+                log.error("ipConfig is not configured correctly....");
                 System.exit(0);
             }
             Arrays.asList(obj.getStr(key).split(",")).forEach(ip -> {
                 if (!Validator.isIpv4(ip)) {
-                    log.error("ipConfig 没有正确配置....");
+                    log.error("ipConfig is not configured correctly....");
                     System.exit(0);
                 }
                 if (!facilityIp.containsKey(ip)) {
@@ -156,7 +156,7 @@ public class SyslogParseChannels {
                 }
             });
         });
-        log.info("ipConfig 配置:\t{}", facilityIp);
+        log.info("ipConfig configuration:\t{}", facilityIp);
     }
 
     /**
@@ -234,14 +234,14 @@ public class SyslogParseChannels {
         } else {
             body = this.dispose(headers, eventBody);
         }
-        Assert.isTrue(body != null, "错误事件,抛弃");
+        Assert.isTrue(body != null, "Error events are discarded...");
         body = this.delBlank(body);
         if (body instanceof String) {
             event.setBody((String.valueOf(body)).getBytes(StandardCharsets.UTF_8));
         } else {
             event.setBody(JsonEventConverter.get().convert(body));
         }
-        log.info("Syslog 处理完成:\t{}", body);
+        log.info("Syslog processing is complete:\t{}", body);
         return event;
     }
 
