@@ -18,6 +18,7 @@ import cn.hba.audit.flume.soc.logwk.SyslogParseWk;
 import cn.hba.audit.flume.soc.logws.SyslogParseWs;
 import cn.hba.audit.flume.soc.logwyxy.SyslogParseWyxy;
 import cn.hba.audit.flume.util.DaTiUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Validator;
@@ -71,7 +72,7 @@ public class SyslogParseChannels {
         bodyObj.put("center_time", DateUtil.now());
         SyslogParse syslogParse = keys.get(facilityIp.get(ip));
         JSONObject obj = JSONUtil.parseObj(syslogParse.parse(bodyObj.toString()));
-        if (obj.size() == 0) {
+        if (CollUtil.isEmpty(obj)) {
             return null;
         }
         if (!obj.containsKey("facility")) {

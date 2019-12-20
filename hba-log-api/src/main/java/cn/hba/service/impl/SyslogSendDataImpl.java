@@ -44,7 +44,7 @@ public class SyslogSendDataImpl implements SyslogSendData {
                 esService.add(this.index(obj), "doc", obj.toString());
             }
             if (suKafka) {
-                kafkaProducer.send(obj.getStr("log_type").split("_")[0], array.toString());
+                kafkaProducer.send(obj.getStr("log_type").split("_")[0], obj.toString());
             }
         }));
     }

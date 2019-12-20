@@ -37,7 +37,7 @@ public class SyslogApi {
     @PostMapping("/cn/hba/syslog/api")
     public BaseResponse reception(@RequestBody String json, HttpServletRequest request) {
         if (!receptionService.disSyslog(json, ClientUtil.getClientIp(request))) {
-            return new BaseResponse(400, "不是有效的数据!");
+            return new BaseResponse(400, "Not valid data!");
         }
         return new BaseResponse(200, "ok");
     }
