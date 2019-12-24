@@ -65,7 +65,7 @@ public class SxfAttackLog {
      *               "dest_port": "", "user_name": "", "port": "", "dest_ip": ""}
      */
     static boolean isAttackLog(String syslog) {
-        return StringUtil.containsAll(syslog, "event_type\": \"E0", "event_type_sub\": \"E0", "extra", "behaviour_type", "|!");
+        return StringUtil.containsAll(syslog, "event_type", "event_type_sub", "extra", "behaviour_type", "|!","mac");
     }
 
     /**
@@ -80,9 +80,8 @@ public class SxfAttackLog {
             case "E03":
                 return "information_destroy";
             case "E04":
-                return "unusual_connect ";
             case "E05":
-                return "unusual_visit";
+                return "abnormal";
             default:
                 return "other";
         }
