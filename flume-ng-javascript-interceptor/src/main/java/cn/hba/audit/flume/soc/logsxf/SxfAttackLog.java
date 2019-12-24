@@ -76,9 +76,8 @@ public class SxfAttackLog {
             case "E01":
                 return "harm_procedures";
             case "E02":
-                return "network_attack";
             case "E03":
-                return "information_destroy";
+                return "network_attack";
             case "E04":
             case "E05":
                 return "abnormal";
