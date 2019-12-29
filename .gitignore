@@ -26,3 +26,7 @@ out/
 *.*~
 *~
 .merge_file*
+flume-ng-javascript-interceptor/src/main/resources/
+hba-common/src/
+hba-es/src/test/
+hba-log-analysis/src/main/java/cn.hba/syslog/service/impl/LogStrategyImpl.java

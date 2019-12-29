@@ -7,6 +7,7 @@ import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -21,6 +22,7 @@ import java.util.concurrent.*;
  * @date 2019/12/10 11:04
  */
 @Service
+@Log4j2
 public class SyslogSendDataImpl implements SyslogSendData {
     private ThreadFactory namedThreadFactory = ThreadFactoryBuilder.create().setNamePrefix(SyslogReceptionServiceImpl.class.getName()).build();
     private ExecutorService pool = new ThreadPoolExecutor(8, 8,

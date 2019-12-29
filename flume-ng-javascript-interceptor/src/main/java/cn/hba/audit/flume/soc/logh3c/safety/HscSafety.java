@@ -70,7 +70,7 @@ public class HscSafety {
             obj.put("event_type", "shell");
             H3cShell.disLogShell(bo, obj);
         } else {
-            obj.put("event_type", "other");
+            obj.put("log_type", "other");
             obj.put("message_content", bo);
         }
         obj.put("log_des", "HSC - 安全产品 - " + abs);

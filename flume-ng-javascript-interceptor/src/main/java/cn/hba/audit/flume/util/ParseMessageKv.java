@@ -131,7 +131,8 @@ public class ParseMessageKv {
 
     private static JSONObject parse3(String syslog, String shape1, String shape2) {
         JSONObject obj = JSONUtil.createObj();
-        syslog = syslog.trim().replaceAll("\n", "").replaceAll("\t", "").replaceAll("\"", "");
+        syslog = syslog.trim().replaceAll("\n", "")
+                .replaceAll("\t", "").replaceAll("\"", "");
         String[] split = syslog.split(shape2);
         for (int i = 0; i < split.length; i++) {
             if (i == 0) {
@@ -174,7 +175,8 @@ public class ParseMessageKv {
         }
         String key = StrUtil.toUnderlineCase(keys[keys.length - 1].trim());
         String val = split[i].replace((shape1 + vals[vals.length - 1]), "");
-        if (("https".equalsIgnoreCase(val) || "http".equalsIgnoreCase(val)) && i + 1 < split.length - 1 && StringUtil.containsAll(split[i + 1], "//", ".")) {
+        if (("https".equalsIgnoreCase(val) || "http".equalsIgnoreCase(val))
+                && i + 1 < split.length - 1 && StringUtil.containsAll(split[i + 1], "//", ".")) {
             val += ":" + split[++i].split(shape1)[0];
         }
         map.put("key", key);
