@@ -15,7 +15,7 @@ spring:
       force-response: true
       force-request: true
 logging:
-  file: logs/ace-syslog-app.log
+  file: logs/${spring.application.name}.log
   level:
     root: info
 app:

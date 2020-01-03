@@ -247,7 +247,7 @@ public class SyslogParseChannels {
     }
 
     /**
-     * 去除空值与null
+     * 去除空值与null,格式化数字
      */
     private Object delBlank(Object body) {
         JSONObject obj = JSONUtil.parseObj(body);

@@ -29,7 +29,7 @@ public class DaTiUtil {
      * <14>2019-09-19 15:42:18 DPTEC
      *
      * @param syslog 日志
-     * @return yyyy-MM-dd HH:mm:ss
+     * @return yyyy-MM-dd'T'HH:mm:ss.SSSXXX
      */
     public static String disEventTime(String syslog) {
         String date = DateUtil.date().toString(FORMAT);

@@ -65,8 +65,8 @@ public class EsBase {
             return RestClient.builder(hosts).setHttpClientConfigCallback(b -> b.setDefaultCredentialsProvider(cp))
                     .setDefaultHeaders(headers).build();
         } catch (Exception e) {
-            log.error("加载es集群配置失败", e);
+            log.error("加载es集群配置失败", e.getMessage());
+            throw e;
         }
-        return null;
     }
 }
