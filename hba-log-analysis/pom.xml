@@ -9,7 +9,7 @@
         <version>2.0-SNAPSHOT</version>
     </parent>
     <description>日志数据分析</description>
-    <artifactId>ace-log-analysis</artifactId>
+    <artifactId>hba-log-analysis</artifactId>
 
     <dependencies>
         <dependency>
@@ -54,7 +54,7 @@
 
         <dependency>
             <groupId>cn.hba.log</groupId>
-            <artifactId>hba-common</artifactId>
+            <artifactId>hba-common-tool</artifactId>
             <version>2.0-SNAPSHOT</version>
         </dependency>
         <dependency>

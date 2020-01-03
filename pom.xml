@@ -16,9 +16,7 @@
         <module>hba-log-analysis</module>
         <module>hba-log-api</module>
         <module>hba-common</module>
-        <module>hba-es</module>
         <module>hba-audit</module>
-        <module>hba-redis</module>
     </modules>
 
     <parent>

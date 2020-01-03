@@ -33,12 +33,7 @@
 
         <dependency>
             <groupId>cn.hba.log</groupId>
-            <artifactId>hba-common</artifactId>
-            <version>2.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.hba.log</groupId>
-            <artifactId>hba-es</artifactId>
+            <artifactId>hba-common-es</artifactId>
             <version>2.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -9,3 +9,4 @@ logging:
   file: logs/${spring.application.name}.log
   level:
     root: info
+    cn.hba: debug
