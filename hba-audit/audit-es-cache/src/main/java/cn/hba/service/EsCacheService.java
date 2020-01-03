@@ -1,7 +1,6 @@
 package cn.hba.service;
 
 import lombok.NonNull;
-import org.springframework.cache.annotation.Cacheable;
 
 /**
  * es cache
@@ -17,6 +16,5 @@ public interface EsCacheService {
      * @param json 请求条件
      * @return object
      */
-    @Cacheable(key = "#json",value = "EsCacheService.cache")
     Object cache(@NonNull String json);
 }

@@ -21,7 +21,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -35,7 +34,6 @@ import java.util.Map;
  * @date 2018/12/15 16:41
  */
 @Configuration
-@Component
 @Slf4j
 public class RedisConfig extends CachingConfigurerSupport {
 

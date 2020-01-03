@@ -2,6 +2,7 @@ package cn.hba.service.impl;
 
 import cn.hba.service.EsCacheService;
 import lombok.NonNull;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class EsCacheServiceImpl implements EsCacheService {
 
 
+    @Cacheable(key = "#json",value = "EsCacheService.cache")
     @Override
     public Object cache(@NonNull String json) {
         System.out.println(json);
