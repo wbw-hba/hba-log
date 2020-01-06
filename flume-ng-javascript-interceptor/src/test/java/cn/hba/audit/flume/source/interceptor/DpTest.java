@@ -1,6 +1,6 @@
 package cn.hba.audit.flume.source.interceptor;
 
-import cn.hba.audit.flume.soc.logws.SyslogParseWs;
+import cn.hba.audit.flume.soc.log.logws.SyslogParseWs;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;

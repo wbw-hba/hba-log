@@ -1,22 +1,23 @@
 package cn.hba.audit.flume.soc;
 
 import cn.hba.audit.flume.interceptor.JsonEventConverter;
-import cn.hba.audit.flume.soc.log360.SyslogParse360;
-import cn.hba.audit.flume.soc.logapt.SyslogParseApt;
-import cn.hba.audit.flume.soc.logdp.SyslogParseDp;
-import cn.hba.audit.flume.soc.logh3c.SyslogParseH3c;
-import cn.hba.audit.flume.soc.loghw.SyslogParseHw;
-import cn.hba.audit.flume.soc.logjs.SyslogParseJs;
-import cn.hba.audit.flume.soc.logkb.SyslogParseKb;
-import cn.hba.audit.flume.soc.loglm.SyslogParseLm;
-import cn.hba.audit.flume.soc.logrs.SyslogParseRs;
-import cn.hba.audit.flume.soc.logsfd.SyslogParseSfd;
-import cn.hba.audit.flume.soc.logss.SyslogParseSs;
-import cn.hba.audit.flume.soc.logsxf.SyslogParseSxf;
-import cn.hba.audit.flume.soc.logtrx.SyslogParseTrx;
-import cn.hba.audit.flume.soc.logwk.SyslogParseWk;
-import cn.hba.audit.flume.soc.logws.SyslogParseWs;
-import cn.hba.audit.flume.soc.logwyxy.SyslogParseWyxy;
+import cn.hba.audit.flume.soc.exception.abandon.AbandonLog;
+import cn.hba.audit.flume.soc.log.log360.SyslogParse360;
+import cn.hba.audit.flume.soc.log.logapt.SyslogParseApt;
+import cn.hba.audit.flume.soc.log.logdp.SyslogParseDp;
+import cn.hba.audit.flume.soc.log.logh3c.SyslogParseH3c;
+import cn.hba.audit.flume.soc.log.loghw.SyslogParseHw;
+import cn.hba.audit.flume.soc.log.logjs.SyslogParseJs;
+import cn.hba.audit.flume.soc.log.logkb.SyslogParseKb;
+import cn.hba.audit.flume.soc.log.loglm.SyslogParseLm;
+import cn.hba.audit.flume.soc.log.logrs.SyslogParseRs;
+import cn.hba.audit.flume.soc.log.logsfd.SyslogParseSfd;
+import cn.hba.audit.flume.soc.log.logss.SyslogParseSs;
+import cn.hba.audit.flume.soc.log.logsxf.SyslogParseSxf;
+import cn.hba.audit.flume.soc.log.logtrx.SyslogParseTrx;
+import cn.hba.audit.flume.soc.log.logwk.SyslogParseWk;
+import cn.hba.audit.flume.soc.log.logws.SyslogParseWs;
+import cn.hba.audit.flume.soc.log.logwyxy.SyslogParseWyxy;
 import cn.hba.audit.flume.util.DaTiUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
@@ -28,12 +29,15 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
+import cn.hutool.setting.dialect.Props;
 import org.apache.flume.Event;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 用以区分不同种类通道
@@ -63,14 +67,17 @@ public class SyslogParseChannels {
     public Object dispose(Map<String, String> headers, String body) {
         // 原始信息
         String ip = headers.get("facility_ip");
-        if (!facilityIp.containsKey(ip)) {
-            return null;
-        }
+//        if (!facilityIp.containsKey(ip)) {
+//            return null;
+//        }
         JSONObject objBody = JSONUtil.parseObj(body);
         JSONObject bodyObj = JSONUtil.createObj();
         bodyObj.put("syslog", objBody.getStr("syslog"));
         bodyObj.put("center_time", DateUtil.now());
-        SyslogParse syslogParse = keys.get(facilityIp.get(ip));
+
+        SyslogParse syslogParse = new SyslogParseKb();
+        // SyslogParse syslogParse = keys.get(facilityIp.get(ip))
+
         JSONObject obj = JSONUtil.parseObj(syslogParse.parse(bodyObj.toString()));
         if (CollUtil.isEmpty(obj)) {
             return null;
@@ -103,7 +110,7 @@ public class SyslogParseChannels {
             obj.put("log_level", objBody.getStr("Severity", "6"));
         }
 
-        headers.put("topic",obj.getStr("log_type"));
+        headers.put("topic", obj.getStr("log_type"));
         obj.put("log_type", (obj.getStr("log_type") + "_" + obj.getStr("event_type")).toLowerCase());
         if (!obj.containsKey("module_type")) {
             obj.put("module_type", "safe");
@@ -226,7 +233,14 @@ public class SyslogParseChannels {
         return obj;
     }
 
-    Event intercept(boolean isGatherLog, Event event) {
+    /**
+     * 拦截器
+     *
+     * @param isGatherLog 是否收集日志，false不收集
+     * @param event       event
+     * @return Event
+     */
+    public Event intercept(boolean isGatherLog, Event event) {
         Map<String, String> headers = event.getHeaders();
         String eventBody = new String(event.getBody(), StandardCharsets.UTF_8);
         Object body;
@@ -236,6 +250,9 @@ public class SyslogParseChannels {
             body = this.dispose(headers, eventBody);
         }
         Assert.isTrue(body != null, "Error events are discarded...");
+        if (body instanceof AbandonLog) {
+            Assert.isTrue(false, "Take the initiative to discard...");
+        }
         body = this.delBlank(body);
         if (body instanceof String) {
             event.setBody((String.valueOf(body)).getBytes(StandardCharsets.UTF_8));
@@ -247,7 +264,7 @@ public class SyslogParseChannels {
     }
 
     /**
-     * 去除空值与null,格式化数字
+     * 去除空值与null,条件格式化数字
      */
     private Object delBlank(Object body) {
         JSONObject obj = JSONUtil.parseObj(body);
@@ -255,13 +272,13 @@ public class SyslogParseChannels {
         obj.keySet().forEach(e -> {
             Object v = obj.getObj(e);
             String va = v.toString();
-            if (NumberUtil.isNumber(va)) {
+            if (NumberUtil.isNumber(va) && numLimitFields.contains(e)) {
                 o.put(e, NumberUtil.isLong(va) ? NumberUtil.parseLong(va) : NumberUtil.parseNumber(va).doubleValue());
             } else if (!StrUtil.isBlankIfStr(v)) {
                 va = StrUtil.trim(v.toString());
                 if (StrUtil.isNotBlank(va)) {
                     if (JSONUtil.isJsonArray(va)) {
-                        va = JSONUtil.parseArray(va).join(",");
+                        va = va.substring(1, va.length() - 1);
                     }
                     o.put(e, va);
                 }
@@ -269,4 +286,10 @@ public class SyslogParseChannels {
         });
         return o;
     }
+
+    /**
+     * 限制字段转换成数字
+     */
+    private static List<String> numLimitFields = Arrays.stream(Props.getProp("flume.properties")
+            .getStr("number_format_limit_fields").split(",")).collect(Collectors.toList());
 }

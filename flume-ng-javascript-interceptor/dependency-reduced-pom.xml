@@ -61,10 +61,6 @@
           <groupId>org.apache.flume</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>commons-io</artifactId>
           <groupId>commons-io</groupId>
         </exclusion>
@@ -138,8 +134,20 @@
     </dependency>
     <dependency>
       <groupId>cn.hba.log</groupId>
-      <artifactId>hba-common</artifactId>
+      <artifactId>hba-common-tool</artifactId>
       <version>2.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.22</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.10</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

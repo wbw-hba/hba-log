@@ -166,8 +166,8 @@ public class ParseMessageKv {
         if (vals.length == 1) {
             StringBuilder va = new StringBuilder();
             va.append(vals[0]);
-            va.append("=");
             do {
+                va.append("=");
                 va.append(split[++i]);
                 vals = (va.toString()).split(shape1);
             } while (vals.length == 1);
