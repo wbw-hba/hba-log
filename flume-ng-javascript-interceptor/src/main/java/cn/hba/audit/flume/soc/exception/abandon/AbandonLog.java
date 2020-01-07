@@ -15,11 +15,10 @@ public class AbandonLog {
      * 主动丢弃日志
      *
      * @param manufacturers 厂家
-     * @param msg           日志内容
-     * @return AbandonLog class
+     * @return 厂家
      */
-    public static AbandonLog of(String manufacturers, String msg) {
-        log.debug("Abandon the log,manufacturers:\t{},log:\t{}", manufacturers, msg);
-        return new AbandonLog();
+    public static String of(String manufacturers) {
+        log.debug("Abandon the log,manufacturers:\t{}", manufacturers);
+        return AbandonConstant.ABANDON;
     }
 }

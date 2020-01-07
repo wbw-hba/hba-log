@@ -30,9 +30,10 @@ public class H3cAuthentication {
     public static Object authParse(String body) {
         JSONObject obj = JSONUtil.parseObj(body);
         String syslog = obj.getStr("syslog");
-        authDisLog(syslog,obj);
+        authDisLog(syslog, obj);
         return obj;
     }
+
     /**
      * 日志格式：
      * <134>Dec 04 15:12:35 node1 H3C-A2020-G: Login(web)(service=native server=None(None) account=None identity=h3cadmin from=172.31.255.2 login authorize success)
@@ -59,7 +60,7 @@ public class H3cAuthentication {
     public static Object propertyParse(String body) {
         JSONObject obj = JSONUtil.parseObj(body);
         String syslog = obj.getStr("syslog");
-        propertyDisLog(syslog,obj);
+        propertyDisLog(syslog, obj);
         return obj;
     }
 
@@ -70,7 +71,11 @@ public class H3cAuthentication {
      * @return flag
      */
     public static boolean isProperty(String syslog) {
-        return syslog.split(": ")[1].split(" ").length == 9 && StrUtil.containsAny(syslog, "interface");
+        String[] split = syslog.split(": ");
+        if (split.length == 1) {
+            return false;
+        }
+        return split[1].split(" ").length == 9 && StrUtil.containsAny(syslog, "interface");
     }
 
     /**

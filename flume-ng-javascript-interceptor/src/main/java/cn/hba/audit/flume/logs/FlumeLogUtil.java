@@ -102,6 +102,6 @@ public class FlumeLogUtil {
 
     public static void main(String[] args) {
         writeLogByFolder("F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志文件"
-                , ".log", "F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志筛选\\2020-1-1");
+                , ".log", "F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志筛选\\2020-1-7");
     }
 }

@@ -45,6 +45,7 @@ class SxfProcedureLog {
         object.put("an_date", logJson.getStr("上报日期"));
         // 必备字段
         object.put("event_type", "procedure");
+        object.put("log_type", "sysrun");
         object.put("manufacturers_name", "深信服");
         object.put("manufacturers_facility", "系统");
         object.put("facility_type", "系统");

@@ -22,8 +22,15 @@ public class Bastion360Host {
             obj = parse(syslog);
         }
         obj.put("manufacturers_name", "360");
-
         return obj;
+    }
+
+    static boolean isBastion360(String syslog) {
+        if (syslog.split("\\|").length >= 7) {
+            return true;
+        }
+        JSONObject obj = JSONUtil.parseObj(syslog.substring(syslog.indexOf("{")));
+        return !obj.isEmpty() && obj.size() > 1;
     }
 
     public static JSONObject parse(String body) {
@@ -293,7 +300,7 @@ public class Bastion360Host {
 //        JSONObject obj = JSONUtil.parseObj(object);
 //        System.out.println(obj.toJSONString(2));
         JSONObject obj = new JSONObject();
-        obj.put("syslog",syslog);
+        obj.put("syslog", syslog);
 
         System.out.println(JSONUtil.parseObj(select(obj.toString())).toJSONString(2));
     }

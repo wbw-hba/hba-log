@@ -34,7 +34,9 @@ public class FileLogUtil {
         String h3cSecurityName = "H3C-安全产品-";
         String h3cSecurityIp = "192.168.137.5\t192.168.130.3\t192.168.9.16\t192.168.9.15\t192.168.9.14\t192.168.9.11\t192.168.9.10\t" +
                 "192.168.9.6\t192.168.9.5\t192.168.9.4\t192.168.9.2\t192.168.9.1\t192.168.9.8\t192.168.9.9\t" +
-                "192.168.9.17\t192.168.9.18\t192.168.9.19\t192.168.9.20\t192.168.137.3";
+                "192.168.9.17\t192.168.9.18\t192.168.9.19\t192.168.9.20\t192.168.137.3\t" +
+                "192.168.6.42\t192.168.6.38\t192.168.6.13\t192.168.248.2\t192.168.130.12\t192.168.9.12\t" +
+                "192.168.9.7\t192.168.6.142\t192.168.6.106\t192.168.6.54\t192.168.6.50\t192.168.6.46\t";
         Arrays.stream(h3cSecurityIp.split("\t")).forEach(v -> map.put(v, h3cSecurityName));
 
         String hscAuditName = "H3C-运维审计-";
@@ -50,7 +52,7 @@ public class FileLogUtil {
         Arrays.stream(wafIp.split("\t")).forEach(v -> map.put(v, wsWaf));
 
         String rsRaName = "瑞数防爬-";
-        String rsRaIp = "192.168.109.40\t192.168.107.100\t192.168.103.60\t192.168.92.104\t192.168.92.103\t192.168.50.1\t192.168.101.18\t" +
+        String rsRaIp = "192.168.50.1\t192.168.92.103\t192.168.92.104\t192.168.101.18\t192.168.103.60\t192.168.107.100\t192.168.109.40\t" +
                 "192.168.113.203";
         Arrays.stream(rsRaIp.split("\t")).forEach(v -> map.put(v, rsRaName));
 
@@ -81,6 +83,6 @@ public class FileLogUtil {
 
     public static void main(String[] args) {
 //        updateFileNameSuffix("F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志文件", ".log");
-        updateFileByName("F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志筛选\\2020-1-1");
+        updateFileByName("F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志筛选\\2020-1-7");
     }
 }

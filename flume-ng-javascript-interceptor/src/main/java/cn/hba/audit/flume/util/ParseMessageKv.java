@@ -25,6 +25,13 @@ public class ParseMessageKv {
     }
 
     /**
+     * -OperateType=running2net-OperateTime=400-OperateState=success-OperateEndTime=792287392
+     */
+    public static JSONObject parseMessage8(String syslog) {
+        return parse1(syslog, "-", "=");
+    }
+
+    /**
      * 解析 以 xxx=
      * 格式： waf= tag=waf_log_login stat_time=2019-07-10 19:46:50 src_ip=2.75.160.102 user=admin
      */

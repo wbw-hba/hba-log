@@ -68,11 +68,22 @@ public class HscSafety {
             obj.put("log_type", "security");
             obj.put("event_type", "shell");
             H3cShell.disLogShell(bo, obj);
-        } else if (abs.toLowerCase().startsWith("filter")){
+        } else if (abs.toLowerCase().startsWith("filter")) {
             obj.put("log_type", "network");
             obj.put("event_type", "packet_filter");
-            HscSafetyProtocol.disLogProtocol(bo,obj);
-        }else {
+            HscSafetyProtocol.disLogProtocol(bo, obj);
+        } else if (abs.toLowerCase().startsWith("cfgman")) {
+            obj.put("log_type", "opconf");
+            obj.put("event_type", "configuration");
+            H3cOpconf.disLog(bo, obj);
+        } else if (abs.toLowerCase().startsWith("ping")) {
+            obj.put("log_type", "network");
+            obj.put("event_type", "ping");
+            H3cNetwork.disPingLog(bo, obj);
+        } else if (abs.toLowerCase().startsWith("stp")) {
+            obj.put("log_type", "sysrun");
+            obj.put("event_type", "long_range");
+        } else {
             obj.put("log_type", "other");
             obj.put("message_content", bo);
         }
@@ -95,7 +106,7 @@ public class HscSafety {
         obj.put("event_type", num);
         obj.put("log_level", he[1]);
         obj.put("abstract", he[2]);
-        return pubLog[1];
+        return syslog.substring(syslog.indexOf(": ") + 1).trim();
     }
 
     /**

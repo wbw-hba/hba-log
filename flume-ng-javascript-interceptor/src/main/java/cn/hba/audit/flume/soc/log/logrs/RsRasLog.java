@@ -91,6 +91,11 @@ public class RsRasLog {
         }
         // 处理主体内容
         disLog(syslog, obj);
+        if (obj.containsKey("attack_type") && JSONUtil.isJsonArray(obj.getStr("attack_type"))) {
+            StringBuilder builder = new StringBuilder();
+            JSONUtil.parseArray(obj.getStr("attack_type")).forEach(e -> builder.append(String.valueOf(e).replaceAll("\"", "")).append(","));
+            obj.put("attack_type", builder.toString().substring(0, builder.length() - 1));
+        }
         // 必备字段处理
         obj.put("log_type", "attack");
         obj.put("event_type", "waf");
@@ -108,7 +113,7 @@ public class RsRasLog {
             obj.put("facility_hostname", sysJson.getStr("hostname"));
         }
         if (sysJson.containsKey("src_ip")) {
-            obj.put("ip", sysJson.getStr("ip"));
+            obj.put("ip", sysJson.getStr("src_ip"));
         }
         if (sysJson.containsKey("timestamp")) {
             obj.put("event_time", DateUtil.date(sysJson.getLong("timestamp")).toString());

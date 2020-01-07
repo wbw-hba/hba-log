@@ -1,8 +1,9 @@
 package cn.hba.audit.flume.soc;
 
 import cn.hba.audit.flume.interceptor.JsonEventConverter;
-import cn.hba.audit.flume.soc.exception.abandon.AbandonLog;
+import cn.hba.audit.flume.soc.exception.abandon.AbandonConstant;
 import cn.hba.audit.flume.soc.log.log360.SyslogParse360;
+import cn.hba.audit.flume.soc.log.logahjh.SyslogParseAhjh;
 import cn.hba.audit.flume.soc.log.logapt.SyslogParseApt;
 import cn.hba.audit.flume.soc.log.logdp.SyslogParseDp;
 import cn.hba.audit.flume.soc.log.logh3c.SyslogParseH3c;
@@ -64,21 +65,25 @@ public class SyslogParseChannels {
      * @param body    内容
      * @return json 信息
      */
-    public Object dispose(Map<String, String> headers, String body) {
+    private Object dispose(Map<String, String> headers, String body) {
         // 原始信息
         String ip = headers.get("facility_ip");
-//        if (!facilityIp.containsKey(ip)) {
-//            return null;
-//        }
+        if (!facilityIp.containsKey(ip)) {
+            return null;
+        }
         JSONObject objBody = JSONUtil.parseObj(body);
         JSONObject bodyObj = JSONUtil.createObj();
         bodyObj.put("syslog", objBody.getStr("syslog"));
         bodyObj.put("center_time", DateUtil.now());
 
-        SyslogParse syslogParse = new SyslogParseKb();
-        // SyslogParse syslogParse = keys.get(facilityIp.get(ip))
+//        SyslogParse syslogParse = new SyslogParseApt();
+        SyslogParse syslogParse = keys.get(facilityIp.get(ip));
 
-        JSONObject obj = JSONUtil.parseObj(syslogParse.parse(bodyObj.toString()));
+        Object parse = syslogParse.parse(bodyObj.toString());
+        if (AbandonConstant.ABANDON.equals(String.valueOf(parse))) {
+            return parse;
+        }
+        JSONObject obj = JSONUtil.parseObj(parse);
         if (CollUtil.isEmpty(obj)) {
             return null;
         }
@@ -203,6 +208,8 @@ public class SyslogParseChannels {
         keys.put("log_ws", new SyslogParseWs());
         // 网御星云
         keys.put("log_wyxy", new SyslogParseWyxy());
+        // 安和金华
+        keys.put("log_ahjh", new SyslogParseAhjh());
     }
 
     /**
@@ -250,7 +257,7 @@ public class SyslogParseChannels {
             body = this.dispose(headers, eventBody);
         }
         Assert.isTrue(body != null, "Error events are discarded...");
-        if (body instanceof AbandonLog) {
+        if (AbandonConstant.ABANDON.equals(body)) {
             Assert.isTrue(false, "Take the initiative to discard...");
         }
         body = this.delBlank(body);
@@ -259,7 +266,7 @@ public class SyslogParseChannels {
         } else {
             event.setBody(JsonEventConverter.get().convert(body));
         }
-        log.info("Syslog processing is complete:\t{}", body);
+        log.debug("Syslog processing is complete:\t{}", body);
         return event;
     }
 

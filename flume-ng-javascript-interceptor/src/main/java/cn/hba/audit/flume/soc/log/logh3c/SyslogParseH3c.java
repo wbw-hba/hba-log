@@ -27,15 +27,16 @@ public class SyslogParseH3c implements SyslogParse {
             obj.put("module_type", "yunwei");
             obj.put("system_type", "audit");
             return obj;
-        }else if(H3cAuthentication.isProperty(syslog)){
+        } else if (H3cAuthentication.isProperty(syslog)) {
             JSONObject obj = JSONUtil.parseObj(H3cAuthentication.propertyParse(body));
             obj.put("module_type", "yunwei");
             obj.put("system_type", "audit");
             //运维审计  资产验证
             return obj;
+        } else if (syslog.contains("%%")) {
+            return H3cParse.parseSyslog(body);
         }
-
-        return H3cParse.parseSyslog(body);
+        return null;
     }
 
 
@@ -46,6 +47,10 @@ public class SyslogParseH3c implements SyslogParse {
 //        log="<134>Dec 04 15:41:19 node1 H3C-A2020-G: bljuser10 from interface(service=gui login server=group10-3(192.168.109.71) account=any identity=bljuser10 from=192.168.6.154 )";
 //       log = "<190> Dec 24 02:55:12 2019 GB-ZWY-HLWQ-J1J2-S-FW-F1050-1&2 %%10FILTER/6/FILTER_ZONE_IPV4_EXECUTION: SrcZoneName(1025)=Untrust;DstZoneName(1035)=Trust;Type(1067)=ACL;SecurityPolicy(1072)=hanbang_514;RuleID(1078)=174;Protocol(1001)=TCP;Application(1002)=general_tcp;SrcIPAddr(1003)=183.131.177.241;SrcPort(1004)=4220;DstIPAddr(1007)=192.168.202.205;DstPort(1008)=50006;MatchCount(1069)=1;Event(1048)=Permit;\",\"abstract\": \"FILTER_ZONE_IPV4_EXECUTION";
         log = "<190> Dec 28 13:12:54 2019 GB-ZWY-HLWQ-J1J2-S-FW-F1050-1&2 %%10FILTER/6/FILTER_ZONE_IPV4_EXECUTION: SrcZoneName(1025)=Untrust;DstZoneName(1035)=Trust;Type(1067)=ACL;SecurityPolicy(1072)=server_work_newn;RuleID(1078)=101;Protocol(1001)=TCP;Application(1002)=general_tcp;SrcIPAddr(1003)=47.96.234.43;SrcPort(1004)=63117;DstIPAddr(1007)=192.168.221.133;DstPort(1008)=80;MatchCount(1069)=1;Event(1048)=Permit;\",\"abstract\": \"FILTER_ZONE_IPV4_EXECUTION";
+        log = "<189>Dec 26 04:59:18 2019 GB-ZWY-GGQ-I5I6-M-SW-S5560-54C-3&4 %%10CFGMAN/5/CFGMAN_OPTCOMPLETION: -OperateType=running2net-OperateTime=400-OperateState=success-OperateEndTime=792287392; Operation completed.";
+        log = "<190>Dec 25 10:49:50 2019 GB-ZWY-GGQ-I1I2-S-SW-S10506-1&2 %%10PING/6/PING_STATISTICS: Ping statistics for 192.168.6.1: 5 packet(s) transmitted, 5 packet(s) received, 0.0% packet loss, round-trip min/avg/max/std-dev = 3.138/5.111/11.086/3.021 ms.";
+        log = "<20> Dec 28 15:00:01 2019 System_ID=H3C Toplevel=Notification Action=调整系统时间与NTP服务器192.168.176.208一致，误差 0.006073 秒";
+        log = "<190>Jan  4 22:07:05 2020 GB-ZWY-GGQ-H6H7-M-SW-S5560-54C-7&8 %%10STP/6/STP_NOTIFIED_TC: Instance 0's port Bridge-Aggregation64 was notified a topology change.";
         JSONObject obj = JSONUtil.createObj();
         obj.put("syslog", log);
         SyslogParse parse = new SyslogParseH3c();

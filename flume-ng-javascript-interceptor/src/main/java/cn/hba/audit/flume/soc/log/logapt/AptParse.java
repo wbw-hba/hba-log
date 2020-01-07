@@ -23,10 +23,21 @@ class AptParse {
             disBody(logSplit, obj);
             return obj;
         } else {
-            // 主动丢弃
-            return AbandonLog.of("apt", syslog);
+            // 该日志无事件类别，主动丢弃
+            return AbandonLog.of("apt");
         }
     }
+
+    /**
+     * 数据库日志判断
+     *
+     * @param syslog 日志
+     * @return flag
+     */
+//    private static boolean isSqlLog(String syslog) {
+//        syslog.split("")
+////        if (s)
+//    }
 
     private static void disBody(String[] logSplit, JSONObject obj) {
         ArrayList<String> param = CollUtil.newArrayList(
