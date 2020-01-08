@@ -6,7 +6,7 @@ target/
 .project
 .settings/
 .classpath
-ace-modules/ace-tool/src/main/resources/application-dev.yml
+ace-modules/ace-tool/src/main/resources/*-dev.yml
 *.log
 tmp/
 .idea/
@@ -26,7 +26,5 @@ out/
 *.*~
 *~
 .merge_file*
-flume-ng-javascript-interceptor/src/main/resources/
 hba-common/src/
 hba-es/src/test/
-hba-log-analysis/src/main/java/cn.hba/syslog/service/impl/LogStrategyImpl.java
