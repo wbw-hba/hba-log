@@ -31,9 +31,9 @@ class SxfFlowLog {
         obj.put("log_type", "flow");
         obj.put("event_type", "flow");
         obj.put("manufacturers_name", "深信服");
-        obj.put("manufacturers_facility", "流量审计");
-        obj.put("facility_type", "流量审计");
-        obj.put("log_des", "深信服-流量审计-流量");
+        obj.put("manufacturers_facility", "跨网防火墙");
+        obj.put("facility_type", "防火墙");
+        obj.put("log_des", "深信服-防火墙-流量");
     }
 
     /**

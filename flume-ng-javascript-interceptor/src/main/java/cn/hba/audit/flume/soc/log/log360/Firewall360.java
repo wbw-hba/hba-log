@@ -88,10 +88,10 @@ public class Firewall360 {
             obj.put("event_type", "other");
         }
 
-        obj.put("manufacturers_name", "360");
-        obj.put("manufacturers_facility", "防火墙");
-        obj.put("facility_type", "跨网防火墙");
-        obj.put("log_des", "360 - 跨网防火墙");
+        obj.put("manufacturers_name", "奇安信");
+        obj.put("manufacturers_facility", "跨网防火墙");
+        obj.put("facility_type", "防火墙");
+        obj.put("log_des", "奇安信 - 跨网防火墙");
     }
 
     /**

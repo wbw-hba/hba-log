@@ -36,4 +36,11 @@ public class SyslogParseWs implements SyslogParse {
         }
         return null;
     }
+
+    public static void main(String[] args) {
+        String log = "<188>Jan 6 08:25:55 SecOS 2020-01-06 08:25:55 WAF: 59.255.90.221:60117->59.255.22.67 dip=192.168.92.100 devicename=SecOS url=/jact/ui/widgets/hanweb/calendar/imgs/calendar_btn.png method=GET args= flag_field= block_time=0 http_type= attack_field=0 profile_id=13 rule_id=20030 type=Signature Rule severity=0 action=CONTINUE referer= useragent= post= equipment=2 os=8 browser=14 |";
+        JSONObject obj = JSONUtil.createObj();
+        obj.put("syslog", log);
+        System.out.println(JSONUtil.parse(new SyslogParseWs().parse(obj.toString())).toJSONString(2));
+    }
 }

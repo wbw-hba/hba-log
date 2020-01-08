@@ -4,6 +4,10 @@ import cn.hba.audit.flume.util.StringUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import cn.hutool.setting.dialect.Props;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * h3c 安全产品
@@ -44,10 +48,24 @@ public class HscSafety {
         // 主体内容处理
         disLog(bo, obj);
         // 必须字段
-        obj.put("manufacturers_name", "H3C");
-        obj.put("manufacturers_facility", "安全产品");
-        obj.put("facility_type", "web");
+        obj.put("manufacturers_name", "华三");
+        obj.put("manufacturers_facility", "虚墙");
+        obj.put("facility_type", "防火墙");
+        if (H3C_MAN.containsKey(obj.getStr("facility_ip"))) {
+            String[] facility = H3C_MAN.get(obj.getStr("facility_ip")).split(",");
+            obj.put("manufacturers_facility", facility[1]);
+            obj.put("facility_type", facility[0]);
+        }
         return obj;
+    }
+
+    /**
+     * 加载指定产商配置
+     */
+    private static final Map<String, String> H3C_MAN = loadMan();
+
+    private static Map<String, String> loadMan() {
+        return Props.getProp("h3c.properties").toBean(Map.class);
     }
 
     /**

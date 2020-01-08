@@ -60,16 +60,16 @@ class AptParse {
             obj.put("log_type", "attack");
             obj.put("event_type", "apt");
             obj.put("event_son_type", "apt");
-            obj.put("log_des", "apt-攻击-apt");
+            obj.put("log_des", "中安网脉-apt-攻击");
         } else {
             obj.put("log_type", "menace");
             obj.put("event_type", classType(obj.getStr("classtype")));
-            obj.put("log_des", "apt-apt-安全事件");
+            obj.put("log_des", "中安网脉-apt-安全事件");
             obj.put("threat_type", threatType((String) obj.get("threat_type")));
         }
-        obj.put("manufacturers_name", "apt");
+        obj.put("manufacturers_name", "中安网脉");
         obj.put("manufacturers_facility", "apt");
-        obj.put("facility_type", "安全事件");
+        obj.put("facility_type", "安全事件分析");
 
         //删除与说明文档重复的属性
         obj.remove("sensor_ip");

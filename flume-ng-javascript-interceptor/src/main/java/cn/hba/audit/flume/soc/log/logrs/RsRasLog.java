@@ -100,10 +100,10 @@ public class RsRasLog {
         obj.put("log_type", "attack");
         obj.put("event_type", "waf");
         obj.put("event_son_type", "reptile");
-        obj.put("manufacturers_name", "瑞数");
-        obj.put("manufacturers_facility", "RSA");
-        obj.put("facility_type", "爬虫");
-        obj.put("log_des", "瑞数 - RSA - 防爬信息");
+        obj.put("manufacturers_name", "瑞树");
+        obj.put("manufacturers_facility", "防自动化攻击");
+        obj.put("facility_type", "防火墙");
+        obj.put("log_des", "瑞数 - 防火墙 - 防爬信息");
         return obj;
     }
 

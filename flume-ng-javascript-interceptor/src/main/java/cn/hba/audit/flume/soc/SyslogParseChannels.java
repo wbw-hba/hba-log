@@ -72,7 +72,7 @@ public class SyslogParseChannels {
         JSONObject objBody = JSONUtil.parseObj(body);
         JSONObject bodyObj = JSONUtil.createObj();
         bodyObj.put("syslog", objBody.getStr("syslog"));
-
+        bodyObj.put("facility_ip",ip);
 //        SyslogParse syslogParse = new SyslogParseKb();
         SyslogParse syslogParse = keys.get(facilityIp.get(ip));
 

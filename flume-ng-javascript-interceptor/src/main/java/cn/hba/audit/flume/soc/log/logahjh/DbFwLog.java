@@ -74,8 +74,8 @@ public class DbFwLog {
         obj.put("log_type", "network");
         obj.put("event_type", "database");
         obj.put("manufacturers_name", "安和金华");
-        obj.put("manufacturers_facility", "防火墙");
-        obj.put("facility_type", "数据库");
+        obj.put("manufacturers_facility", "数据库防火墙");
+        obj.put("facility_type", "防火墙");
         obj.put("log_des", "安和金华 - 数据库- 防火墙");
 
     }

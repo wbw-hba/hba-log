@@ -39,12 +39,12 @@ class KbParse {
             obj.put("result", bodyJson.getStr("result"));
         }
         //必备字段
-        obj.put("manufacturers_facility", "安全产品");
-        obj.put("facility_type", "数据交换");
+        obj.put("manufacturers_facility", "网闸");
+        obj.put("facility_type", "网络安全设备");
         if (bodyJson.containsKey("date")) {
             obj.put("event_time", DateUtil.parse(bodyJson.getStr("date")).toString(DaTiUtil.FORMAT));
         }
-        obj.put("manufacturers_name", "科博");
+        obj.put("manufacturers_name", "中铁信安");
 
     }
 

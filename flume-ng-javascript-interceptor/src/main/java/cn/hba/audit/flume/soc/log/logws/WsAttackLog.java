@@ -59,9 +59,10 @@ class WsAttackLog {
         object.put("ip", sport[sport.length - 2]);
         object.put("facility_type", sport[sport.length - 3].substring(sport[sport.length - 3].lastIndexOf(" ") + 1));
         // 中间
-        String[] body = ("devicename=" + head[1]).split("action=");
+        String[] body = ("devicename=" + head[1]).split("referer=");
         disLogBody(body[0], object);
         // 末尾
+        body = ("devicename=" + head[1]).split("action=");
         String[] referer = body[1].split("referer=");
         object.put("process_mode", referer[0].trim());
         String[] useragent = referer[1].split("useragent=");

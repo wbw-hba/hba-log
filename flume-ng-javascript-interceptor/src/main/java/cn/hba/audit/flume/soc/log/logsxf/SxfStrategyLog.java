@@ -34,9 +34,9 @@ class SxfStrategyLog {
         obj.put("log_type", "strategy");
         obj.put("event_type", "authentication");
         obj.put("manufacturers_name", "深信服");
-        obj.put("manufacturers_facility", "服务控制或应用控制");
-        obj.put("facility_type", "服务控制或应用控制");
-        obj.put("log_des", "深信服-服务控制或应用控制-认证");
+        obj.put("manufacturers_facility", "跨网防火墙");
+        obj.put("facility_type", "防火墙");
+        obj.put("log_des", "深信服-防火墙-认证");
     }
 
     /**

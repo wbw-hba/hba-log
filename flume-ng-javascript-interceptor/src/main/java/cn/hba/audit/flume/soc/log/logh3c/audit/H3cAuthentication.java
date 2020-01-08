@@ -89,10 +89,11 @@ public class H3cAuthentication {
         JSONObject bodyObj = ParseMessageKv.parseMessage5(sysStr);
         obj.put("event_title", splitStr.substring(0, splitStr.indexOf("(")));
         obj.put("login_ip", bodyObj.getStr("from"));
+
+        obj.put("log_des", "h3c-运维审计-资产");
         addLog(bodyObj, obj);
         //必备字段
         obj.put("event_type", "property");
-        obj.put("log_des", "h3c-运维审计-资产");
     }
 
     /**
@@ -113,9 +114,9 @@ public class H3cAuthentication {
         }
         //公共必备字段
         obj.put("log_type", "operation");
-        obj.put("manufacturers_name", "h3c");
-        obj.put("manufacturers_facility", "运维");
-        obj.put("facility_type", "运维");
+        obj.put("manufacturers_name", "华三");
+        obj.put("manufacturers_facility", "堡垒机");
+        obj.put("facility_type", "安全审计管控");
 
     }
 

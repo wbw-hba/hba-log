@@ -47,9 +47,9 @@ class SxfProcedureLog {
         object.put("event_type", "procedure");
         object.put("log_type", "sysrun");
         object.put("manufacturers_name", "深信服");
-        object.put("manufacturers_facility", "系统");
-        object.put("facility_type", "系统");
-        object.put("log_des", "深信服-系统-程序运行");
+        object.put("manufacturers_facility", "跨网防火墙\n");
+        object.put("facility_type", "防火墙");
+        object.put("log_des", "深信服-防火墙-程序运行");
         return object;
     }
 }
