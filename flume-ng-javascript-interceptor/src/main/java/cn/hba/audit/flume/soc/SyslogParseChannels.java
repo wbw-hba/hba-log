@@ -22,23 +22,21 @@ import cn.hba.audit.flume.soc.log.logwyxy.SyslogParseWyxy;
 import cn.hba.audit.flume.util.DaTiUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Validator;
+import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import cn.hutool.setting.dialect.Props;
 import org.apache.flume.Event;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * 用以区分不同种类通道
@@ -74,9 +72,8 @@ public class SyslogParseChannels {
         JSONObject objBody = JSONUtil.parseObj(body);
         JSONObject bodyObj = JSONUtil.createObj();
         bodyObj.put("syslog", objBody.getStr("syslog"));
-        bodyObj.put("center_time", DateUtil.now());
 
-//        SyslogParse syslogParse = new SyslogParseApt();
+//        SyslogParse syslogParse = new SyslogParseKb();
         SyslogParse syslogParse = keys.get(facilityIp.get(ip));
 
         Object parse = syslogParse.parse(bodyObj.toString());
@@ -93,24 +90,7 @@ public class SyslogParseChannels {
         if (!obj.containsKey("priority")) {
             obj.put("priority", objBody.getInt("Priority", 6));
         }
-        if (!obj.containsKey("center_time")) {
-            obj.put("center_time", bodyObj.getStr("center_time"));
-        }
-        try {
-            String eventTime = obj.getStr("center_time");
-            if (eventTime.startsWith("\"") || eventTime.startsWith("\\")) {
-                eventTime = eventTime.substring(1);
-            }
-            if (eventTime.endsWith("\"") || eventTime.endsWith("\\")) {
-                eventTime = eventTime.substring(0, eventTime.length() - 1);
-            }
-            headers.put("center_time", DateUtil.parse(eventTime).toString());
-            obj.put("center_time", DateUtil.parse(eventTime).toMsStr());
-        } catch (Exception e) {
-            String ms = DateUtil.date().toMsStr();
-            headers.put("center_time", ms);
-            obj.put("center_time", ms);
-        }
+        obj.put("center_time", DateUtil.date().toString(DaTiUtil.FORMAT));
         if (!obj.containsKey("log_level")) {
             obj.put("log_level", objBody.getStr("Severity", "6"));
         }
@@ -127,7 +107,9 @@ public class SyslogParseChannels {
         obj.put("facility_ip", ip);
         try {
             if (obj.containsKey("event_time")) {
-                obj.put("event_time", DateUtil.parse(obj.getStr("event_time")).toString(DaTiUtil.FORMAT));
+                if (!obj.getStr("event_time").contains("+")) {
+                    obj.put("event_time", DateUtil.parse(obj.getStr("event_time")).toString(DaTiUtil.FORMAT));
+                }
             } else {
                 obj.put("event_time", DaTiUtil.disEventTime(objBody.getStr("syslog")));
             }
@@ -208,7 +190,7 @@ public class SyslogParseChannels {
         keys.put("log_ws", new SyslogParseWs());
         // 网御星云
         keys.put("log_wyxy", new SyslogParseWyxy());
-        // 安和金华
+        // 安华金和
         keys.put("log_ahjh", new SyslogParseAhjh());
     }
 
@@ -279,7 +261,7 @@ public class SyslogParseChannels {
         obj.keySet().forEach(e -> {
             Object v = obj.getObj(e);
             String va = v.toString();
-            if (NumberUtil.isNumber(va) && numLimitFields.contains(e)) {
+            if (NumberUtil.isNumber(va) && NUM_LIMIT_FIELDS.contains(e)) {
                 o.put(e, NumberUtil.isLong(va) ? NumberUtil.parseLong(va) : NumberUtil.parseNumber(va).doubleValue());
             } else if (!StrUtil.isBlankIfStr(v)) {
                 va = StrUtil.trim(v.toString());
@@ -297,6 +279,20 @@ public class SyslogParseChannels {
     /**
      * 限制字段转换成数字
      */
-    private static List<String> numLimitFields = Arrays.stream(Props.getProp("flume.properties")
-            .getStr("number_format_limit_fields").split(",")).collect(Collectors.toList());
+    private static final List<String> NUM_LIMIT_FIELDS = numFiled();
+
+    /**
+     * 读取过滤字段
+     *
+     * @return List
+     */
+    public static List<String> numFiled() {
+        LinkedList<String> list = CollUtil.newLinkedList();
+        FileUtil.readLines(ResourceUtil.getResource("flume.number.field"), CharsetUtil.UTF_8).forEach(filed -> {
+            if (!filed.contains("#")) {
+                list.addAll(StrUtil.splitTrim(StrUtil.removeAllLineBreaks(StrUtil.trim(filed)), ","));
+            }
+        });
+        return new ArrayList<>(CollUtil.distinct(list));
+    }
 }

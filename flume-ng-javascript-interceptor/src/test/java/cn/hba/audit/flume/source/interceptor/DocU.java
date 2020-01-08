@@ -25,7 +25,7 @@ import java.util.Map;
 public class DocU {
 
     public static void main(String[] args) {
-        String syslog = "<12>Dec 26 02:48:14 slave4 apt: 2019-12-26 02:47:53 1577299673422 ATD 192.168.123.5 NDE 28a5af08-3d54-4034-a5af-083d54703419 p5p1 2027265 bad-unknown bad-unknown null 192.168.103.21 58868 null 59.202.42.251 80 http tcp http security-defect R0VUIC9saWNlbnNlbmFtZS9zaWduL2VsY2xpY2VuY2VwZGYveWpqL2h6cHNjeGt6L01MMDAwNDExNjQ5YmY2NzY5ODZlZWFiZjU2YTdhOGRhNzY2OGVlOTcucGRmIEhUVFAvMS4xDQphY2NlcHQ6ICovKg0KdXNlci1hZ2VudDogTW96aWxsYS80LjAgKGNvbXBhdGlibGU7IE1TSUUgNi4wOyBXaW5kb3dzIE5UIDUuMTtTVjEpDQpDYWNoZS1Db250cm9sOiBuby1jYWNoZQ0KUHJhZ21hOiBuby1jYWNoZQ0KSG9zdDogNTkuMjAyLjQyLjI1MQ0KQ29ubmVjdGlvbjoga2VlcC1hbGl2ZQ0KDQo= null 1 1 null Dotted Quad Host PDF Request method:GET;status_code:200;host:59.202.42.251;uri:/licensename/sign/elclicencepdf/yjj/hzpscxkz/ML000411649bf676986eeabf56a7a8da7668ee97.pdf; Dotted Quad Host PDF Request China beijing 39.9047,116.4072 CN China Beijing 39.9289,116.3883 CN";
+        String syslog = "<133>Jan 06 11:22:52 wangzhaNB charset=UTF-8 type=fileTransfer instanceName=文件接收实例 taskName=dbSyncFileTransfer logLevel=(5) 通知 logType=实例运行 objectName=/copFile/dbSync_file/GB-DZYZ-H-G-04_back_storage_1/01002716-01002717.sql.zz-81012884PcQ.bin desc=文件接收完成,耗时[0 ms ],速度[Infinity GB/s ][Infinity B/s ] result=成功 date=2020-01-06 11:22:52.928";
         String body = "{\n" +
                 "    \"Priority\":\"6\",\n" +
                 "    \"host\":\"[127, 0, 0, 1]\",\n" +
