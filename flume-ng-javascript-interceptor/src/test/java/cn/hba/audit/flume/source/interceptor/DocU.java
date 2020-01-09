@@ -25,7 +25,7 @@ import java.util.Map;
 public class DocU {
 
     public static void main(String[] args) {
-        String syslog = "<133>Jan 06 11:22:52 wangzhaNB charset=UTF-8 type=fileTransfer instanceName=文件接收实例 taskName=dbSyncFileTransfer logLevel=(5) 通知 logType=实例运行 objectName=/copFile/dbSync_file/GB-DZYZ-H-G-04_back_storage_1/01002716-01002717.sql.zz-81012884PcQ.bin desc=文件接收完成,耗时[0 ms ],速度[Infinity GB/s ][Infinity B/s ] result=成功 date=2020-01-06 11:22:52.928";
+        String syslog = "<12>Jan  9 15:43:01 slave4 apt: 2020-01-09 15:43:01\t1578555781119\tATD\t192.168.123.5\tNDE\td30257df-843b-4551-8257-df843b5551ad\tp5p1\t11000022\tpolicy-violation\tweak-password\tnull\t192.168.103.23\t52314\tnull\t59.255.104.184\t8181\tnull\ttcp\thttp\tsecurity-defect\tnull\tnull\t1\t5\tnull\tnull\tmethod:POST;status_code:200;host:59.255.104.184;uri:/httpproxy;\tWeak password\tChina\tbeijing\t39.9047,116.4072\tCN\tChina\tBeijing\t39.9289,116.3883\tCN\n";
         String body = "{\n" +
                 "    \"Priority\":\"6\",\n" +
                 "    \"host\":\"[127, 0, 0, 1]\",\n" +

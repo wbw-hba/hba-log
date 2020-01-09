@@ -14,7 +14,7 @@ public class DaTiUtil {
 
     public static void main(String[] args) {
         // Thu Dec 05 21:55:51 CST 2019
-        System.out.println(disEventTime("<188>Dec  4 11:13:36 SecOS 2019-12-04 11:13:36 WAF: 192.168.6.154:11970->59.255.22.68 dip=192.168.109.99 devicename=SecOS url=/audit-web/rest/epointqlk/audititem/home/audititemdetailhomeaction/page_load method=POST args=changeOrModify=1&taskguid=7c34ff26-eed0-4254-8c80-d4adec295e57&_dialogId_=559D2FD7-3B9D-46FC-A00D-BC107669EC55&_winid=w9687&_t=946817&isCommondto=true&MmEwMD=4Ptf3fyV0htTXaiTwhiI7QiXqbMlgrPMtmpK4ZYHLQFZ6.cCrFmAsVZuLDnaiJzeo40Wpnl.PlcQIfXu6IfXYdYjKxXlGEUUjVryIPYBsdA7FU_x3hFD7YrDOGp.JxFv0yMc9_nfZj0rgN4l8Osj2.itFEjhlAvgX73XS6NM_s0DFiCGkveqd243I0fh0.H3hcAypkTv.evGesfRy66skrWJTcXgFHquGM1Bs7n46aFxyQGg8vcBjVLtfbdbcvwr33mWs5gN1HPRKWv.kzi0oAp1U257QWLVwFCnAXYLcdnzp9wvEM1bcYMsfn6j9dSmpwI3veLFNYwzVQ6HeDiBfJlp4.gSlllu8OC3FfUOCu_XaCVW.j6x_Yoqg7fki8eHmST1 flag_field= block_time=0 http_type= attack_field=1 profile_id=6 rule_id=30041 type=Signature Rule severity=0 action=CONTINUE referer= useragent= post= equipment=2 os=8 browser=0 |\n"));
+        System.out.println(disEventTime("<12>Jan  9 15:43:01 slave4 apt: 2020-01-09 15:43:26\t1578555806767\tATD\t192.168.123.5\tNDE\taafa7329-58d5-40b2-ba73-2958d580b24b\tp5p1\t10180004\tthreat-intelligence-alarm\toutbound2malicious-server\tRemote control tool Pupy\t192.168.6.154\t50841\tnull\t192.168.6.161\t443\thttps\ttcp\tssl\tremote-control\tnull\tnull\t5\t5\tRemote control tool Pupy\te35df3e00ca4ef31d42b34bebaa2f86e\tsource:5;\n"));
     }
 
     public static final String FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
