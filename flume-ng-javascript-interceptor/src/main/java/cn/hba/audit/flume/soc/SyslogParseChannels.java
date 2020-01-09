@@ -66,15 +66,15 @@ public class SyslogParseChannels {
     private Object dispose(Map<String, String> headers, String body) {
         // 原始信息
         String ip = headers.get("facility_ip");
-//        if (!facilityIp.containsKey(ip)) {
-//            return null;
-//        }
+        if (!facilityIp.containsKey(ip)) {
+            return null;
+        }
         JSONObject objBody = JSONUtil.parseObj(body);
         JSONObject bodyObj = JSONUtil.createObj();
         bodyObj.put("syslog", objBody.getStr("syslog"));
         bodyObj.put("facility_ip",ip);
-        SyslogParse syslogParse = new SyslogParseApt();
-//        SyslogParse syslogParse = keys.get(facilityIp.get(ip));
+//        SyslogParse syslogParse = new SyslogParseApt();
+        SyslogParse syslogParse = keys.get(facilityIp.get(ip));
 
         Object parse = syslogParse.parse(bodyObj.toString());
         if (AbandonConstant.ABANDON.equals(String.valueOf(parse))) {

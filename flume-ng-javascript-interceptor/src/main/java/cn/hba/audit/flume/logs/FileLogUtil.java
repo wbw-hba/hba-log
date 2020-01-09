@@ -34,7 +34,7 @@ public class FileLogUtil {
     private static Map<String, String> map = new HashMap<>();
 
     static {
-        String ipConfig = FileUtil.readString(ResourceUtil.getResource("ip.conf"), CharsetUtil.UTF_8);
+        String ipConfig = FileUtil.readString(ResourceUtil.getResource("ip-config.json"), CharsetUtil.UTF_8);
         ipConfig = ipConfig.replaceAll("\t", "").replaceAll("\n", "");
         JSONUtil.parseObj(ipConfig).forEach((k, v) -> Arrays.stream(String.valueOf(v).split(",")).forEach(ip -> map.put(ip, k + "-")));
     }
