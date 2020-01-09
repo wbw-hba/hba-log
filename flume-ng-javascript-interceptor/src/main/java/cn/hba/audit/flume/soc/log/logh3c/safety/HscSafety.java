@@ -1,6 +1,7 @@
 package cn.hba.audit.flume.soc.log.logh3c.safety;
 
 import cn.hba.audit.flume.util.StringUtil;
+import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -65,7 +66,10 @@ public class HscSafety {
     private static final Map<String, String> H3C_MAN = loadMan();
 
     private static Map<String, String> loadMan() {
-        return Props.getProp("h3c.properties").toBean(Map.class);
+        Map<String, String> map = new HashMap<>(20);
+        Props props = new Props("h3c.properties", CharsetUtil.GBK);
+        props.keySet().forEach(ip -> map.put(String.valueOf(ip), props.getStr(String.valueOf(ip))));
+        return map;
     }
 
     /**
@@ -105,7 +109,7 @@ public class HscSafety {
             obj.put("log_type", "other");
             obj.put("message_content", bo);
         }
-        obj.put("log_des", "HSC - 安全产品 - " + abs);
+        obj.put("log_des", "华三 - 安全产品 - " + abs);
     }
 
     /**

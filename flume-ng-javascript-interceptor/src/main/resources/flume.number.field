@@ -5,4 +5,4 @@ dest_port_changeds,attack_duration,attack_packets,attack_bytes,attack_interdict_
 http_status,ser_status_code,times_repetition,count_num,summary_count,summary_offset,total_sess,duration_time,send_bytes,
 received_bytes,inpkt,outpkt,ackage_size,total_flow,bytes_received,pkts_received,up_flow,down_flow,attack_num,message_number,
 count_number,received_number,match_count,req_num,res_num,cpu_temperature,mem_temperature,board_temperature,size,init_pkt_count,
-init_byte_count,rply_pkt_count,rply_byte_count
+init_byte_count,rply_pkt_count,rply_byte_count,nat_after_port,nat_after_dport
