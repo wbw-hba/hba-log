@@ -34,7 +34,7 @@ class AptParse {
      * @param syslog 日志
      * @return flag
      */
-//    private static boolean isSqlLog(String syslog) {
+//    private static boolean isSqlLog(String syslog) {object_id
 //        syslog.split("")
 ////        if (s)
 //    }

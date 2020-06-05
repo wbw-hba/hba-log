@@ -50,7 +50,8 @@ public class SyslogParseH3c implements SyslogParse {
         log = "<189>Dec 26 04:59:18 2019 GB-ZWY-GGQ-I5I6-M-SW-S5560-54C-3&4 %%10CFGMAN/5/CFGMAN_OPTCOMPLETION: -OperateType=running2net-OperateTime=400-OperateState=success-OperateEndTime=792287392; Operation completed.";
         log = "<190>Dec 25 10:49:50 2019 GB-ZWY-GGQ-I1I2-S-SW-S10506-1&2 %%10PING/6/PING_STATISTICS: Ping statistics for 192.168.6.1: 5 packet(s) transmitted, 5 packet(s) received, 0.0% packet loss, round-trip min/avg/max/std-dev = 3.138/5.111/11.086/3.021 ms.";
         log = "<20> Dec 28 15:00:01 2019 System_ID=H3C Toplevel=Notification Action=调整系统时间与NTP服务器192.168.176.208一致，误差 0.006073 秒";
-        log = "<190> Jan 06 13:47:23 2020 GB-ZWY-HLWQ-J1J2-S-FW-F1050-1&2 %%10FILTER/6/FILTER_ZONE_IPV4_EXECUTION: SrcZoneName(1025)=Trust;DstZoneName(1035)=Untrust;Type(1067)=ACL;SecurityPolicy(1072)=auth to any;RuleID(1078)=25;Protocol(1001)=TCP;Application(1002)=general_tcp;SrcIPAddr(1003)=192.168.183.15;SrcPort(1004)=31119;DstIPAddr(1007)=117.161.25.21;DstPort(1008)=8100;MatchCount(1069)=1;Event(1048)=Permit;\n";
+        log = "<6> Jan 13 10:33:37 2020 GB-ZWY-HLWQ-J1J2-S-FW-F1050-1&2 %%10session/6/SESSION_IPV4_FLOW: Protocol(1001)=TCP;Application(1002)=general_tcp;SrcIPAddr(1003)=192.168.183.14;SrcPort(1004)=15447;NatSrcIPAddr(1005)=112.35.18.188;NatSrcPort(1006)=58971;DstIPAddr(1007)=117.161.25.21;DstPort(1008)=8200;NatDstIPAddr(1009)=117.161.25.21;NatDstPort(1010)=8200;InitPktCount(1044)=1;InitByteCount(1046)=60;RplyPktCount(1045)=0;RplyByteCount(1047)=0;RcvVPNInstance(1042)=;SndVPNInstance(1043)=;RcvDSLiteTunnelPeer(1040)=;SndDSLiteTunnelPeer(1041)=;BeginTime_e(1013)=01132020023338;EndTime_e(1014)=;Event(1048)=(8)Session created;";
+
         JSONObject obj = JSONUtil.createObj();
         obj.put("syslog", log);
         SyslogParse parse = new SyslogParseH3c();

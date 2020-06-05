@@ -103,7 +103,7 @@ public class RsRasLog {
         obj.put("manufacturers_name", "瑞树");
         obj.put("manufacturers_facility", "防自动化攻击");
         obj.put("facility_type", "防火墙");
-        obj.put("log_des", "瑞数 - 防火墙 - 防爬信息");
+        obj.put("log_des", "瑞树 - 防火墙 - 防爬信息");
         return obj;
     }
 

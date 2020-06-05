@@ -18,7 +18,7 @@ import java.util.Map;
  * @date 2019/12/4 19:59
  */
 public class FileLogUtil {
-    private static Log log = Log.get();
+    private static final Log log = Log.get();
 
     /**
      * 对文件夹内文件名修改后缀
@@ -31,7 +31,7 @@ public class FileLogUtil {
                 .forEach(e -> log.info(e.getName() + "\t" + e.renameTo(new File(e.getAbsolutePath() + suffix))));
     }
 
-    private static Map<String, String> map = new HashMap<>();
+    private static final Map<String, String> map = new HashMap<>();
 
     static {
         String ipConfig = FileUtil.readString(ResourceUtil.getResource("ip-config.json"), CharsetUtil.UTF_8);
@@ -53,6 +53,6 @@ public class FileLogUtil {
 
     public static void main(String[] args) {
 //        updateFileNameSuffix("F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志文件", ".log");
-        updateFileByName("F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志筛选\\2020-1-9");
+        updateFileByName("F:\\Desktop\\2019-11-28-北京-安管\\北京-es-采集\\原始日志-2020-1-1\\日志筛选\\2020-1-14");
     }
 }
