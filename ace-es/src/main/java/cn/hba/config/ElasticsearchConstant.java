@@ -1,10 +1,6 @@
 package cn.hba.config;
 
 
-import cn.hutool.system.SystemUtil;
-
-import java.io.File;
-
 /**
  * es 常量
  *
@@ -12,7 +8,6 @@ import java.io.File;
  * @date 2019/11/4 14:19
  */
 public interface ElasticsearchConstant {
-    String PROJECT_PATH = SystemUtil.get(SystemUtil.USER_DIR) + File.separator + "config" + File.separator;
 
     /**
      * es 配置文件

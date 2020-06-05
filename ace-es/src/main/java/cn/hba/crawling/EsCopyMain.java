@@ -4,6 +4,7 @@ import cn.hba.config.ElasticSearchUtil;
 import cn.hba.config.ElasticsearchBase;
 import cn.hba.config.ElasticsearchConstant;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -15,10 +16,7 @@ import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 复制数据
@@ -32,8 +30,8 @@ public class EsCopyMain {
     private static final ElasticSearchUtil.Builder es_local = new ElasticSearchUtil.Builder(new ElasticsearchBase().esInit());
 
     private static final String INDEX_SIZE;
-    private static List<String> excludeIndex;
-    private static List<String> includeIndex;
+    private static final List<String> excludeIndex = new LinkedList<>();
+    private static List<String> includeIndex = new LinkedList<>();
 
     static {
         Props props = new Props(ElasticsearchConstant.ES_COPY);
@@ -85,21 +83,21 @@ public class EsCopyMain {
         String entity = EntityUtils.toString(indices.getEntity());
         for (String en : entity.split("\n")) {
             for (String a : en.trim().split(" ")) {
-                if (!this.isNeedIndex(a)) {
-                    return;
+                if (StrUtil.isBlank(a) || !this.isNeedIndex(a)) {
+                    continue;
                 }
-                log.debug("索引：{}", a);
                 try {
-                    if (!a.endsWith(today) || !a.endsWith(yesterday) || !a.endsWith(beforeDay) || !a.endsWith(month)) {
-                        continue;
-                    }
+//                    if (!a.endsWith(today) || !a.endsWith(yesterday) || !a.endsWith(beforeDay) || !a.endsWith(month)) {
+//                        continue;
+//                    }
+                    log.info("处理索引:\t{}", a);
                     Map<String, String> map = new HashMap<>(1);
                     map.put("size", INDEX_SIZE);
                     Response response = es.performRequest("POST", a + "/_search", map);
                     entity = EntityUtils.toString(response.getEntity());
 
                     JSONObject hits = JSONUtil.parseObj(entity).getJSONObject("hits");
-                    if (hits.getInt("total", 0) < 1) {
+                    if (hits.getJSONArray("hits").size() < 1) {
                         continue;
                     }
                     JSONArray hitsArray = hits.getJSONArray("hits");
